@@ -2,7 +2,7 @@
 
 ##Objetivo
 
-Usando un CSV de contratos de gobierno construir un API con SailsJS y un frontend con angular que lo utilize. El proyecto se llamara contratobook. Clonar este proyecto y crear una carpeta denonde
+Usando un CSV de contratos de gobierno construir un API con SailsJS y un frontend con angular que lo utilize. El proyecto se llamara contratobook.
 
 ###Requisitos:
 
@@ -12,31 +12,18 @@ Usando un CSV de contratos de gobierno construir un API con SailsJS y un fronten
 * sails
 * bower
 
-###Tips:
-
-####Instalacion de sails y bower
-
-`npm -g install sails`
-`npm -g insall bower`
-
-####Nodemon
-
-Nodejs funciona como un servidor independiente, es decir cada app es un server; Usar nodemon para manter el servidor ejecutandose y para que se reinicie automaticamente cuando hay cambios en el codigo del backend:
-
-`nodemon -w api -w config`
-
-####NPM
-Si `sails new` no te funciona despues de instalar sails intenta desintalar node e instalarlo via el metodo recomendado oficialmente:
-https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions
 
 ###Importar DB
--En terminal usar (`mongoimport --help` para entender que significan estos parametros): 
+- En terminal usar (`mongoimport --help` para entender que significan estos parametros): 
+
 `mongoimport -d contratobook -c contrato --type csv --headerline /ruta/al/archivo.csv`
 
--Ingresar a la interfaz de comandos de mongo y verificar que tenga registros nuestra collection (tabla) deben ser 101 registros;
-`mongo`
-`use contratobook;`
-`db.contrato.count();`
+- Ingresar a la interfaz de comandos de mongo y verificar que tenga registros nuestra collection (tabla) deben ser 101 registros;
+
+```javascript
+use contratobook;
+db.contrato.count();`
+```
 
 ###Inicializar APP
 
@@ -44,6 +31,7 @@ En terminal navegar a carpeta de este proyecto (ej. ~/dev/contratobook/) desde a
 
 `sails new <tunombre>`
 
+Despues puedes levantar el app con `sails lift`, `nodemon` ó `node app.js`
 
 ###Configurar DB
 
@@ -71,3 +59,23 @@ Para probar ejecutamos:
 Posteriormente en el navegador navegamos a: http://localhost:1337 y http://localhost:1337/api/contrato
 
 
+###Tips:
+
+####Instalacion de sails y bower
+
+`npm -g install sails`
+`npm -g insall bower`
+
+####Nodemon
+
+Nodejs funciona como un servidor independiente, es decir cada app es un server. Usar nodemon o foreverpara manter el servidor ejecutandose y para que se reinicie automaticamente cuando hay cambios en el codigo del backend ahorra mucho tiempo. 
+Ej:
+
+`nodemon -w api -w config`
+
+####NPM
+Si `sails new` no te funciona despues de instalar sails intenta desintalar node e instalarlo via el metodo recomendado oficialmente:
+https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions
+
+####Terminator
+Puedes usar terminator para tener dos consolas visibles; una con el app ejecutandose y la otra libre para hacer otros comandos. Con ctrl+e agregas un panel horizontalmente y con ctrl+w lo cierras
