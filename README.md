@@ -14,10 +14,10 @@ Usando un CSV de contratos de gobierno construir un API con SailsJS y un fronten
 
 
 ###Importar DB
-- En terminal usar (`mongoimport --help` para entender que significan estos parametros): 
 
 `mongoimport -d contratobook -c contrato --type csv --headerline /ruta/al/archivo.csv`
 
+- Usar (`mongoimport --help` para entender que significan estos parametros): 
 - Ingresar a la interfaz de comandos de mongo y verificar que tenga registros nuestra collection (tabla) deben ser 101 registros;
 
 ```javascript
@@ -29,13 +29,13 @@ db.contrato.count();`
 
 En terminal navegar a carpeta de este proyecto (ej. ~/dev/contratobook/) desde ahi ejecutar:
 
-`sails new <tunombre>`
+`sails new {tunombre}`
 
 Despues puedes levantar el app con `sails lift`, `nodemon` ó `node app.js`
 
 ###Configurar DB
 
-Desde ahora en adelante todos los comandos son en la raiz de nuestro project (~/dev/contratobook/<tunombre>)
+Desde ahora en adelante todos los comandos son en la raiz de nuestro project (~/dev/contratobook/{tunombre})
 
 -Instalar el adapator de mongo en nuestro proyecto
 
