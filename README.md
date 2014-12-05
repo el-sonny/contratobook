@@ -31,32 +31,37 @@ En terminal navegar a carpeta de este proyecto (ej. ~/dev/contratobook/) desde a
 
 `sails new {tunombre}`
 
-Despues puedes levantar el app con `sails lift`, `nodemon` ó `node app.js`
+Despues puedes levantar el app con `sails lift`, `nodemon` ó `node app.js` y navegar a http://localhost:1337 para verificar que este funcionando
 
 ###Configurar DB
 
-Desde ahora en adelante todos los comandos son en la raiz de nuestro project (~/dev/contratobook/{tunombre})
+Desde ahora en adelante todos los comandos son en la raiz de nuestro proyecto (~/dev/contratobook/{tunombre})
 
--Instalar el adapator de mongo en nuestro proyecto
+- Instalar el adapator de mongo en nuestro proyecto
 
 `npm install --save sails-mongo`
 
--En el archivo config/connections.js cambiar "someMongoServer" a mongo y cambiar las config con el nombre de nuestra db (contratobook) y el user y pass en blanco ('').
--En el archvio config/model.js cambiar conection a mongo y migrate a 'safe' (descomentar)
+- En el archivo `config/connections.js` 
+  - Cambiar `someMongoServer` a `mongo` y en ese registro
+    - Configurar database a el nombre de nuestra db: `contratobook`
+    - Configurar y el user y pass en blanco `''`
+- En el archvio config/model.js cambiar conection a `mongo` y migrate a `'safe'`
 
 ###Crear API y Probar
+
 Para generar al API de contratos dentro de la carpeta del proyecto ejecutar:
 
 `sails generate api contrato`
 
-Esto genera un archivo en api/models y otro en api/controllers. Con esto y nuestros datos tenemos una api funcional pero tenemos que habilitarla:
+Esto genera un archivo en `api/models` y otro en `api/controllers`. Con esto y nuestros datos tenemos una api funcional pero tenemos que habilitarla:
 
-En el archivo config/blueprints.js setear actions y prefix a true y prefix a '/api'
+- En el archivo `config/blueprints.js` setear actions y prefix a true y prefix a `'/api'`
 
 Para probar ejecutamos:
+
 `sails lift`
 
-Posteriormente en el navegador navegamos a: http://localhost:1337 y http://localhost:1337/api/contrato
+Posteriormente en el navegador navegamos a: http://localhost:1337 y http://localhost:1337/api/contrato para verificar que este nuestro home y el API; si hay errores de sintaxis se reportaran en la consola.
 
 
 ###Tips:
