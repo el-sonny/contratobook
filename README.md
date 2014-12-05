@@ -44,8 +44,8 @@ Desde ahora en adelante todos los comandos son en la raiz de nuestro proyecto (~
 - En el archivo `config/connections.js` 
   - Cambiar `someMongoServer` a `mongo` y en ese registro
     - Configurar database a el nombre de nuestra db: `contratobook`
-    - Configurar y el user y pass en blanco `''`
-- En el archvio config/model.js cambiar conection a `mongo` y migrate a `'safe'`
+    - Configurar el user y pass en blanco `''`
+- En el archvio config/model.js cambiar conection a `'mongo'` y migrate a `'safe'`
 
 ###Crear API y Probar
 
@@ -53,15 +53,15 @@ Para generar al API de contratos dentro de la carpeta del proyecto ejecutar:
 
 `sails generate api contrato`
 
-Esto genera un archivo en `api/models` y otro en `api/controllers`. Con esto y nuestros datos tenemos una api funcional pero tenemos que habilitarla:
+Esto genera un archivo en `api/models` y otro en `api/controllers`. Con esto y nuestros datos tenemos una api funcional pero tenemos que habilitarlo:
 
-- En el archivo `config/blueprints.js` setear actions y prefix a true y prefix a `'/api'`
+- En el archivo `config/blueprints.js` configurar `actions` y `rest` a `true` y prefix a `'/api'`
 
 Para probar ejecutamos:
 
 `sails lift`
 
-Posteriormente en el navegador navegamos a: http://localhost:1337 y http://localhost:1337/api/contrato para verificar que este nuestro home y el API; si hay errores de sintaxis se reportaran en la consola.
+Posteriormente en el navegador navegamos a: http://localhost:1337 y http://localhost:1337/api/contrato para verificar que este nuestro home y API funcionales. Si hay errores de sintaxis se reportaran en la consola.
 
 
 ###Tips:
@@ -73,7 +73,7 @@ Posteriormente en el navegador navegamos a: http://localhost:1337 y http://local
 
 ####Nodemon
 
-Nodejs funciona como un servidor independiente, es decir cada app es un server. Usar nodemon o foreverpara manter el servidor ejecutandose y para que se reinicie automaticamente cuando hay cambios en el codigo del backend ahorra mucho tiempo. 
+Nodejs funciona como un servidor independiente, es decir cada app es un server. Usar nodemon o forever para manter el servidor ejecutandose y para que se reinicie automaticamente cuando hay cambios en el codigo del backend es una buena practcica.
 Ej:
 
 `nodemon -w api -w config`
@@ -83,4 +83,4 @@ Si `sails new` no te funciona despues de instalar sails intenta desintalar node 
 https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions
 
 ####Terminator
-Puedes usar terminator para tener dos consolas visibles; una con el app ejecutandose y la otra libre para hacer otros comandos. Con ctrl+e agregas un panel horizontalmente y con ctrl+w lo cierras
+Puedes usar terminator para tener dos consolas visibles; una con el app ejecutandose y la otra libre para hacer otros comandos. Con `ctrl+e` agregas un panel horizontalmente y con `ctrl+w` lo cierras
