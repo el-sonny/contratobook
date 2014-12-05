@@ -1,49 +1,73 @@
-Objetivo, usando un CSV de contratos de gobierno construir un API con SailsJS y un frontend con angular que lo utilize. El proyecto se llamara contratobook
+#Contratobook
 
-Requisitos:
-NodeJS, npm,sails,bower
+##Objetivo
 
-Instalar sails y bower
-npm -g install sails
-npm -g insall bower
+Usando un CSV de contratos de gobierno construir un API con SailsJS y un frontend con angular que lo utilize. El proyecto se llamara contratobook. Clonar este proyecto y crear una carpeta denonde
 
-Tips:
+###Requisitos:
+
+* NodeJS
+* npm
+* mongo
+* sails
+* bower
+
+###Tips:
+
+####Instalacion de sails y bower
+
+`npm -g install sails`
+`npm -g insall bower`
+
+####Nodemon
+
 Nodejs funciona como un servidor independiente, es decir cada app es un server; Usar nodemon para manter el servidor ejecutandose y para que se reinicie automaticamente cuando hay cambios en el codigo del backend:
-ej: nodemon -w api -w config
 
-Si sails new no te funciona despues de instalar sails intenta desintalar node e isntalarlo via el metodo recomendado oficialmente:
+`nodemon -w api -w config`
+
+####NPM
+Si `sails new` no te funciona despues de instalar sails intenta desintalar node e instalarlo via el metodo recomendado oficialmente:
 https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions
 
+###Importar DB
+-En terminal usar (`mongoimport --help` para entender que significan estos parametros): 
+`mongoimport -d contratobook -c contrato --type csv --headerline /ruta/al/archivo.csv`
+
+-Ingresar a la interfaz de comandos de mongo y verificar que tenga registros nuestra collection (tabla) deben ser 101 registros;
+`mongo`
+`use contratobook;`
+`db.contrato.count();`
+
+###Inicializar APP
+
+En terminal navegar a carpeta de este proyecto (ej. ~/dev/contratobook/) desde ahi ejecutar:
+
+`sails new <tunombre>`
 
 
-Paso 1
-Importar la base de datos a mongo en terminal usar (mongoimport --help para entender que significan estos parametros): 
-*mongoimport -d contratobook -c contrato --type csv --headerline /ruta/al/archivo.csv
+###Configurar DB
 
-Ingresar a la interfaz de comandos de mongo y verificar que tenga registros nuestra collection (tabla) deben ser 101 registros;
-*mongo
-*use contratobook;
-db.contrato.count();
+Desde ahora en adelante todos los comandos son en la raiz de nuestro project (~/dev/contratobook/<tunombre>)
 
-Paso 2
+-Instalar el adapator de mongo en nuestro proyecto
 
-En terminal navegar a carpeta de desarollo (ej. ~/dev) desde ahi ejecutar:
+`npm install --save sails-mongo`
 
-*sails new contratobook
+-En el archivo config/connections.js cambiar "someMongoServer" a mongo y cambiar las config con el nombre de nuestra db (contratobook) y el user y pass en blanco ('').
+-En el archvio config/model.js cambiar conection a mongo y migrate a 'safe' (descomentar)
 
+###Crear API y Probar
+Para generar al API de contratos dentro de la carpeta del proyecto ejecutar:
 
-Paso 3
-Configurar nuestra DB de mongo con nuestro app(desde ahora en adelante todos los comandos son en la raiz de nuestro project; ~/dev/contratobook)
+`sails generate api contrato`
 
-*npm install --save sails-mongo
+Esto genera un archivo en api/models y otro en api/controllers. Con esto y nuestros datos tenemos una api funcional pero tenemos que habilitarla:
 
-En el archivo config/connections.js cambiar "someMongoServer" a mongo y cambiar las config con el nombre de nuestra db (contratobook) y el user y pass en blanco ('').
-En el archvio config/model.js cambiar conection a mongo y migrate a 'safe' (descomentar)
+En el archivo config/blueprints.js setear actions y prefix a true y prefix a '/api'
 
-Paso 4
-Generar el api para nuestra collection "contrato"; dentro de la carpeta del proyecto ejecutar:
+Para probar ejecutamos:
+`sails lift`
 
-*sails generate api contrato
+Posteriormente en el navegador navegamos a: http://localhost:1337 y http://localhost:1337/api/contrato
 
-Esto genera un archivo en api/models y otro en api/controllers ya con esto y nuestros datos tenemos una api funcional pero tenemos que habilitarla; en el archivo config/blueprints.js setear actions y prefix a true y prefix a '/api'
 
