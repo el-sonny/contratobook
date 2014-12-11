@@ -12,6 +12,8 @@ Usando un CSV de contratos de gobierno construir un API con SailsJS y un fronten
 * sails
 * bower
 
+##Parte I - configuración de app y DB
+
 
 ###Importar DB
 
@@ -63,6 +65,62 @@ Para probar ejecutamos:
 
 Posteriormente en el navegador navegamos a: http://localhost:1337 y http://localhost:1337/api/contrato para verificar que este nuestro home y API funcionales. Si hay errores de sintaxis se reportaran en la consola.
 
+####Parte 2 - Configuracion de UI
+
+notas: 
+ - Todos los comandos son desde la raiz de nuestro projecto (contratobook/{tunombre})
+ - Se asume que el app esta ejecutandose ya sea con `sails lift` o alguna otra herramienta como `nodemon` o `forever`
+ - Cuando se hacen cambios en el backend `api/` `config/` se tiene que re-iniciar el servidor para que se ejecute el nuevo código
+
+
+###Instalar librerias de cliente
+
+- Inicializar bower con `bower init`. Dar enter (respuesta default) a todas las preguntas que hace bower.
+
+- Crear un archivo `.bowerrc` en la raiz de nuestro proyecto. Adentro de este archivo colocar el sig. código:
+
+```javascript
+ {
+   "directory": "assets/bower_components"
+ }
+```
+- Instalar `angular-material`; instalara otras dependencias como `angular`, `bower install --save angular-material`
+
+- Hammer.js es requerido por angular-material pero no esta incluido en el paquete 	`bower install --save hammer.js`
+
+- Angular route 'bower intall --save angular-route'
+
+
+###Importar Librerias de Cliente
+
+El archivo pipeline define cuales son las librerias que son importadas a nuestro template maestro `views/layout.ejs`
+
+- En `tasks/pipeline` modificar las siguientes variables para que incluyan las librerias que queremos:
+
+```javascript
+var cssFilesToInject = [
+  'bower_components/angular-material/angular-material.css',
+  'styles/**/*.css'
+];
+```
+
+```javascript
+var jsFilesToInject = [
+  'js/dependencies/sails.io.js',
+  'bower_components/angular/angular.min.js',
+  'bower_components/angular-route/angular-route.min.js',
+  'bower_components/hammer.js/hammer.min.js',
+  'bower_components/angular-aria/angular-aria.min.js',
+  'bower_components/angular-animate/angular-animate.min.js',
+  'bower_components/angular-material/angular-material.min.js',
+  'js/**/*.js'
+];
+```
+
+- Re-iniciar servidor y verificar en archivo `views/layout.ejs` si estan importados nuestros scipts
+
+###Configurar Layout
+
 
 ###Tips:
 
@@ -74,6 +132,7 @@ Posteriormente en el navegador navegamos a: http://localhost:1337 y http://local
 ####Nodemon
 
 Nodejs funciona como un servidor independiente, es decir cada app es un server. Usar nodemon o forever para manter el servidor ejecutandose y para que se reinicie automaticamente cuando hay cambios en el codigo del backend es una buena practcica.
+
 Ej:
 
 `nodemon -w api -w config`
@@ -84,3 +143,5 @@ https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debia
 
 ####Terminator
 Puedes usar terminator para tener dos consolas visibles; una con el app ejecutandose y la otra libre para hacer otros comandos. Con `ctrl+e` agregas un panel horizontalmente y con `ctrl+w` lo cierras
+
+
